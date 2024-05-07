@@ -1,0 +1,32 @@
+Problem of Study:
+The problem revolves around predicting social media impact accurately to inform marketing strategies. This could include predicting the reach, engagement, or conversion rates of social media campaigns.
+
+why choose the title
+This title was chosen to emphasize the focus on improving prediction accuracy, a critical aspect of social media marketing strategy. By employing machine learning models like Random Forest and Logistic Regression, the study aims to provide marketers with more reliable insights to enhance decision-making and campaign effectiveness.
+
+           one user to see the one product and seeing side ad is another product to show some offer and less price that user buy only 1 prod and to see other prod automatically 2 r mre pd by to gets profits.
+
+           pd release that notf reach every user some usr see some usr cant see that per pd notf is not remove in sales ends. that usr 2 days after see that notf to remove notf. to sales profits  increase to use in marketing strategy.
+
+variability of data
+
+Data source and data collection
+ data can be sourced from social media platforms, third-party data providers, and internal sources. Utilize APIs, data scraping, surveys, and questionnaires for data collection.
+
+pre-processing
+Preprocessing means cleaning the data, processing text features (if present),addressing imbalanced data, selecting informative features, and splitting the dataset for training and testing.
+
+feature extraction
+the process of transforming raw data into numerical features while preserving the original data set's information.
+
+random forest spl
+Random Forest is handling high-dimensional data and capturing complex relationships.classification, regression and other task multiple decision trees to reach a single result. 
+
+logistic regression  spl
+one or more independent variables and a binary outcome using the logistic function. independent variables (predictors) and their corresponding dependent variables (responses) eg: success and failure
+
+modeling 
+Predictive modeling is a statistical technique that uses historical and current data to predict future outcomes
+
+marketing and strategy
+Marketing strategy formulation is the process of establishing a company's marketing goals and objectives. Marketing strategy execution is the process of turning a marketing strategy into action
