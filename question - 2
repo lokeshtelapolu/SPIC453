@@ -1,0 +1,27 @@
+main findings and implications
+algorithm performance, model accuracy, improving ROI(return of investment)his allows for better resource allocation towards campaigns with higher predicted impact
+
+main objectives
+modelling and prediction, enhance market strategy (better resource allocation and campaign design based on predicted impact)
+
+literature review
+model selection, evaluation metrics
+
+why did you choose these methodology
+high accuracy to handle complex relationships in social media data.
+
+How do your results contribute to the existing knowledge in your field?
+knowledge in the field by demonstrating the efficacy of Random Forest and Logistic Regression models for social media impact prediction. 
+
+main challenges, limitations drawbacks
+data quality (Social media data can be noisy, unstructured, and prone to biases, requiring extensive preprocessing and cleaning to extract meaningful insights), feature extraction, Overfitting (Machine learning models can easily overfit to the training data, leading to poor performance on unseen data)  
+
+        inherent uncertainty, data dependence, overfitting, and ethical concerns.(he accuracy of the predictions heavily relies on the quality and completeness of the data used to train the models. Biased, incomplete, or noisy data can lead to inaccurate predictions and misleading results)
+
+What tools or software did you use, and why?
+social media api, Python and its libraries like Scikit-learn were used for data analysis and machine learning tasks.
+
+can you explain the technical aspects of your project in more detail?
+data collection, preprocessing, feature engineering, model selection (Random Forest and Logistic Regression), training, evaluation, interpretation.
+
+
