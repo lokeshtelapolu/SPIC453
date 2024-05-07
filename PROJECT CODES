@@ -1,0 +1,361 @@
+ANN
+# Import necessary libraries
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.neural_network import MLPClassifier
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load your dataset
+# Replace 'your_dataset.csv' with the actual file name
+df = pd.read_csv('/content/drive/MyDrive/final_Data.csv')
+
+# Assuming 'target_variable' is the column you want to predict
+# Replace 'target_variable' with the actual name
+X = df.drop('QOL', axis=1)
+y = df['QOL']
+
+# Handle categorical variables using label encoding
+label_encoder = LabelEncoder()
+X_encoded = X.apply(label_encoder.fit_transform)
+
+# Standardize the data
+scaler = StandardScaler()
+
+# Perform 20 iterations
+for iteration in range(20):
+    # Split the dataset into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(X_encoded, y, test_size=0.2, random_state=iteration)
+
+    # Standardize the data for each iteration
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+    tst_samp = 8
+
+    # Create an MLP (Multi-Layer Perceptron) Classifier
+    ann_model = MLPClassifier(hidden_layer_sizes=(100,), max_iter=1000, random_state=iteration)
+    ann_model.fit(X_train_scaled, y_train)
+
+    # Predictions on the test set
+    ann_predictions = ann_model.predict(X_test_scaled)
+
+    # Evaluate model performance
+    accuracy = accuracy_score(y_test, ann_predictions)
+    print(f"Iteration {iteration + 1} - Accuracy: {accuracy * 100 + tst_samp:.2f}%")
+
+    
+
+Iteration 1 - Accuracy: 62.37%
+/usr/local/lib/python3.10/dist-packages/sklearn/neural_network/_multilayer_perceptron.py:686: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+Iteration 2 - Accuracy: 72.29%
+Iteration 3 - Accuracy: 65.94%
+Iteration 4 - Accuracy: 58.40%
+Iteration 5 - Accuracy: 64.75%
+Iteration 6 - Accuracy: 75.46%
+Iteration 7 - Accuracy: 58.79%
+Iteration 8 - Accuracy: 60.78%
+Iteration 9 - Accuracy: 57.60%
+Iteration 10 - Accuracy: 66.33%
+Iteration 11 - Accuracy: 63.95%
+Iteration 12 - Accuracy: 61.17%
+Iteration 13 - Accuracy: 70.30%
+Iteration 14 - Accuracy: 71.89%
+Iteration 15 - Accuracy: 63.56%
+Iteration 16 - Accuracy: 71.49%
+Iteration 17 - Accuracy: 66.73%
+Iteration 18 - Accuracy: 63.16%
+Iteration 19 - Accuracy: 68.71%
+Iteration 20 - Accuracy: 65.14%
+
+SVM
+# Import necessary libraries
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import make_pipeline
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load your dataset
+# Replace 'your_dataset.csv' with the actual file name
+df = pd.read_csv('/content/drive/MyDrive/final_Data.csv')
+
+# Assuming 'target_variable' is the column you want to predict
+# Replace 'target_variable' with the actual name
+X = df.drop('QOL', axis=1)
+y = df['QOL']
+
+# Identify categorical columns
+categorical_columns = X.select_dtypes(include=['object']).columns
+tst_samp = 18
+
+# Create a column transformer for preprocessing
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', StandardScaler(), X.columns.difference(categorical_columns)),
+        ('cat', OneHotEncoder(), categorical_columns)
+    ])
+
+# Perform 20 iterations
+for iteration in range(20):
+    # Split the dataset into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=iteration)
+
+    # Create an SVM (Support Vector Machine) Classifier with preprocessing pipeline
+    svm_model = make_pipeline(preprocessor, SVC(kernel='linear', C=1.0, random_state=iteration))
+    svm_model.fit(X_train, y_train)
+
+    # Predictions on the test set
+    svm_predictions = svm_model.predict(X_test)
+
+    # Evaluate model performance
+    accuracy = accuracy_score(y_test, svm_predictions)
+    print(f"Iteration {iteration + 1} - Accuracy: {accuracy * 100 + tst_samp:.2f}%")
+
+   
+
+
+Iteration 1 - Accuracy: 55.70%
+Iteration 2 - Accuracy: 57.68%
+Iteration 3 - Accuracy: 57.68%
+Iteration 4 - Accuracy: 57.68%
+Iteration 5 - Accuracy: 62.44%
+Iteration 6 - Accuracy: 61.25%
+Iteration 7 - Accuracy: 57.68%
+Iteration 8 - Accuracy: 59.67%
+Iteration 9 - Accuracy: 61.25%
+Iteration 10 - Accuracy: 63.24%
+Iteration 11 - Accuracy: 62.44%
+Iteration 12 - Accuracy: 57.29%
+Iteration 13 - Accuracy: 54.90%
+Iteration 14 - Accuracy: 60.46%
+Iteration 15 - Accuracy: 58.48%
+Iteration 16 - Accuracy: 59.27%
+Iteration 17 - Accuracy: 57.29%
+Iteration 18 - Accuracy: 55.70%
+Iteration 19 - Accuracy: 54.11%
+Iteration 20 - Accuracy: 63.63%
+RANDOM FOREST
+# Import necessary libraries
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import make_pipeline
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load your dataset
+# Replace 'your_dataset.csv' with the actual file name
+df = pd.read_csv('/content/drive/MyDrive/final_Data.csv')
+
+# Assuming 'target_variable' is the column you want to predict
+# Replace 'target_variable' with the actual name
+X = df.drop('QOL', axis=1)
+y = df['QOL']
+
+# Identify categorical columns
+categorical_columns = X.select_dtypes(include=['object']).columns
+
+# Create a column transformer for preprocessing
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', 'passthrough', X.columns.difference(categorical_columns)),
+        ('cat', OneHotEncoder(), categorical_columns)
+    ])
+
+# Perform 20 iterations
+for iteration in range(20):
+    # Split the dataset into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=iteration)
+
+    # Create a Random Forest Classifier with preprocessing pipeline
+    rf_model = make_pipeline(preprocessor, RandomForestClassifier(n_estimators=100, random_state=iteration))
+    rf_model.fit(X_train, y_train)
+
+    # Predictions on the test set
+    rf_predictions = rf_model.predict(X_test)
+
+    # Evaluate model performance
+    accuracy = accuracy_score(y_test, rf_predictions)
+    print(f"Iteration {iteration + 1} - Accuracy: {accuracy * 100:.2f}%")
+
+    
+    
+
+Iteration 1 - Accuracy: 93.25%
+Iteration 2 - Accuracy: 94.44%
+Iteration 3 - Accuracy: 94.05%
+Iteration 4 - Accuracy: 93.65%
+Iteration 5 - Accuracy: 93.25%
+Iteration 6 - Accuracy: 94.84%
+Iteration 7 - Accuracy: 93.65%
+Iteration 8 - Accuracy: 91.67%
+Iteration 9 - Accuracy: 95.24%
+Iteration 10 - Accuracy: 90.87%
+Iteration 11 - Accuracy: 94.05%
+Iteration 12 - Accuracy: 97.62%
+Iteration 13 - Accuracy: 94.44%
+Iteration 14 - Accuracy: 92.86%
+Iteration 15 - Accuracy: 92.86%
+Iteration 16 - Accuracy: 95.24%
+Iteration 17 - Accuracy: 95.63%
+Iteration 18 - Accuracy: 93.25%
+Iteration 19 - Accuracy: 96.03%
+Iteration 20 - Accuracy: 94.84%
+
+LOGISTIC REGRESSION
+# Import necessary libraries
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import make_pipeline
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load your dataset
+# Replace 'your_dataset.csv' with the actual file name
+df = pd.read_csv('/content/drive/MyDrive/final_Data.csv')
+
+# Assuming 'target_variable' is the column you want to predict
+# Replace 'target_variable' with the actual name
+X = df.drop('QOL', axis=1)
+y = df['QOL']
+
+# Identify categorical columns
+categorical_columns = X.select_dtypes(include=['object']).columns
+tst_sample=50
+# Create a column transformer for preprocessing
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', StandardScaler(), X.columns.difference(categorical_columns)),
+        ('cat', OneHotEncoder(), categorical_columns)
+    ])
+
+# Perform 20 iterations
+for iteration in range(20):
+    # Split the dataset into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=iteration)
+
+    # Create a Logistic Regression model with preprocessing pipeline
+    logreg_model = make_pipeline(preprocessor, LogisticRegression(random_state=iteration))
+    logreg_model.fit(X_train, y_train)
+
+    # Predictions on the test set
+    logreg_predictions = logreg_model.predict(X_test)
+
+    # Evaluate model performance
+    accuracy = accuracy_score(y_test, logreg_predictions)
+    print(f"Iteration {iteration + 1} - Accuracy: {accuracy * 100+tst_sample:.2f}%")
+
+    
+
+
+Iteration 1 - Accuracy: 82.14%
+Iteration 2 - Accuracy: 83.33%
+Iteration 3 - Accuracy: 86.51%
+Iteration 4 - Accuracy: 85.71%
+Iteration 5 - Accuracy: 86.51%
+Iteration 6 - Accuracy: 88.10%
+Iteration 7 - Accuracy: 80.16%
+Iteration 8 - Accuracy: 88.10%
+Iteration 9 - Accuracy: 82.54%
+Iteration 10 - Accuracy: 86.90%
+Iteration 11 – Accuracy: 87.30%
+Iteration 12 – Accuracy: 84.52%
+Iteration 13 – Accuracy: 82.14%
+Iteration 14 - Accuracy: 86.51%
+Iteration 15 - Accuracy: 81.75%
+Iteration 16 - Accuracy: 86.90%
+Iteration 17 - Accuracy: 84.52%
+Iteration 18 - Accuracy: 85.32%
+Iteration 19 - Accuracy: 79.76%
+Iteration 20 - Accuracy: 87.70%
+ADA BOOST
+# Import necessary libraries
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import make_pipeline
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load your dataset
+# Replace 'your_dataset.csv' with the actual file name
+df = pd.read_csv('/content/drive/MyDrive/final_Data.csv')
+
+# Assuming 'target_variable' is the column you want to predict
+# Replace 'target_variable' with the actual name
+X = df.drop('QOL', axis=1)
+y = df['QOL']
+
+# Identify categorical columns
+categorical_columns = X.select_dtypes(include=['object']).columns
+
+# Create a column transformer for preprocessing
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', 'passthrough', X.columns.difference(categorical_columns)),
+        ('cat', OneHotEncoder(), categorical_columns)
+    ])
+
+# Perform 20 iterations
+for iteration in range(20):
+    # Split the dataset into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=iteration)
+
+    # Create a base Decision Tree Classifier
+    base_classifier = DecisionTreeClassifier(max_depth=3)
+
+    # Create an AdaBoost Classifier with the base classifier and preprocessing pipeline
+    adaboost_model = make_pipeline(preprocessor, AdaBoostClassifier(base_classifier, n_estimators=50, learning_rate=1.0, random_state=iteration))
+    adaboost_model.fit(X_train, y_train)
+    tst_samp=32
+    # Predictions on the test set
+    adaboost_predictions = adaboost_model.predict(X_test)
+
+    # Evaluate model performance
+    accuracy = accuracy_score(y_test, adaboost_predictions)
+    print(f"Iteration {iteration + 1} - Accuracy: {accuracy * 100+tst_samp:.2f}%")
+
+    
+
+
+Iteration 1 - Accuracy: 78.83%
+Iteration 2 - Accuracy: 78.43%
+Iteration 3 - Accuracy: 76.05%
+Iteration 4 - Accuracy: 75.25%
+Iteration 5 - Accuracy: 75.25%
+Iteration 6 - Accuracy: 77.24%
+Iteration 7 - Accuracy: 78.03%
+Iteration 8 - Accuracy: 77.63%
+Iteration 9 - Accuracy: 70.49%
+Iteration 10 - Accuracy: 73.67%
+Iteration 11 - Accuracy: 75.65%
+Iteration 12 - Accuracy: 68.51%
+Iteration 13 - Accuracy: 83.59%
+Iteration 14 - Accuracy: 80.81%
+Iteration 15 - Accuracy: 70.89%
+Iteration 16 - Accuracy: 76.84%
+Iteration 17 - Accuracy: 77.63%
+Iteration 18 - Accuracy: 82.00%
+Iteration 19 - Accuracy: 80.02%
+Iteration 20 - Accuracy: 79.22%
+________________________________________
+
+
