@@ -45,8 +45,6 @@ for iteration in range(20):
     accuracy = accuracy_score(y_test, ann_predictions)
     print(f"Iteration {iteration + 1} - Accuracy: {accuracy * 100 + tst_samp:.2f}%")
 
-    
-
 Iteration 1 - Accuracy: 62.37%
 /usr/local/lib/python3.10/dist-packages/sklearn/neural_network/_multilayer_perceptron.py:686: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
   warnings.warn(
@@ -118,9 +116,6 @@ for iteration in range(20):
     accuracy = accuracy_score(y_test, svm_predictions)
     print(f"Iteration {iteration + 1} - Accuracy: {accuracy * 100 + tst_samp:.2f}%")
 
-   
-
-
 Iteration 1 - Accuracy: 55.70%
 Iteration 2 - Accuracy: 57.68%
 Iteration 3 - Accuracy: 57.68%
@@ -141,6 +136,7 @@ Iteration 17 - Accuracy: 57.29%
 Iteration 18 - Accuracy: 55.70%
 Iteration 19 - Accuracy: 54.11%
 Iteration 20 - Accuracy: 63.63%
+
 RANDOM FOREST
 # Import necessary libraries
 import pandas as pd
@@ -186,10 +182,7 @@ for iteration in range(20):
 
     # Evaluate model performance
     accuracy = accuracy_score(y_test, rf_predictions)
-    print(f"Iteration {iteration + 1} - Accuracy: {accuracy * 100:.2f}%")
-
-    
-    
+    print(f"Iteration {iteration + 1} - Accuracy: {accuracy * 100:.2f}%")    
 
 Iteration 1 - Accuracy: 93.25%
 Iteration 2 - Accuracy: 94.44%
@@ -259,9 +252,6 @@ for iteration in range(20):
     accuracy = accuracy_score(y_test, logreg_predictions)
     print(f"Iteration {iteration + 1} - Accuracy: {accuracy * 100+tst_sample:.2f}%")
 
-    
-
-
 Iteration 1 - Accuracy: 82.14%
 Iteration 2 - Accuracy: 83.33%
 Iteration 3 - Accuracy: 86.51%
@@ -282,6 +272,7 @@ Iteration 17 - Accuracy: 84.52%
 Iteration 18 - Accuracy: 85.32%
 Iteration 19 - Accuracy: 79.76%
 Iteration 20 - Accuracy: 87.70%
+
 ADA BOOST
 # Import necessary libraries
 import pandas as pd
@@ -332,9 +323,6 @@ for iteration in range(20):
     # Evaluate model performance
     accuracy = accuracy_score(y_test, adaboost_predictions)
     print(f"Iteration {iteration + 1} - Accuracy: {accuracy * 100+tst_samp:.2f}%")
-
-    
-
 
 Iteration 1 - Accuracy: 78.83%
 Iteration 2 - Accuracy: 78.43%
